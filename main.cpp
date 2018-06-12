@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <limits>
 
 int v, e, max_time;
 
@@ -48,17 +49,58 @@ int dfs(int vec, int time, std::vector<int> path) {
 }
 
 int main() {
+	  std::cout << "Input format: number of vertices, number of edges, total time" << std::endl;
     std::cin >> v >> e >> max_time;
+    while(1)
+    {
+      if (std::cin.fail())
+      {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cout << "Wrong input!\nInput format: number of vertices, number of edges, total time" << std::endl;
+        std::cin >> v >> e >> max_time;
+      }
+      else
+      {
+        break;
+      }
+    }
+
 
     visited.resize(v, false);
     g.resize(v);
 
+    std::cout << "Input format: first vertex, second vertex, weight" << std::endl;
+
     for(int i = 0; i < e; ++i) {
         int a, b, t;
+
         std::cin >> a >> b >> t;
+        while(1)
+        {
+          if (std::cin.fail())
+          {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+            std::cout << "Wrong input!\nInput format: first vertex, second vertex, weight" << std::endl;
+            std::cin >> a >> b >> t;
+          }
+          if (a >= v || b >= v)
+          {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+            std::cout << "Wrong input!\nVertex number should satisfy formula \"0 <= v < " << v << "\"" << std::endl;
+            std::cin >> a >> b >> t;
+          }
+          else
+          {
+            break;
+          }
+        }
         g[a].push_back(Edge(b, t));
         g[b].push_back(Edge(a, t));
     }
+
 
     visited[0] = true;
     dfs(0, 0, {0});
