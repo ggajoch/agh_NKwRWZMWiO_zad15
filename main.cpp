@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <limits>
+#include "ParseGraphFile.hpp"
 
 int v, e, max_time;
 
@@ -48,55 +48,32 @@ int dfs(int vec, int time, std::vector<int> path) {
 //    printf("OUT %d\n", vec);
 }
 
-int main() {
-	  std::cout << "Input format: number of vertices, number of edges, total time" << std::endl;
-    std::cin >> v >> e >> max_time;
-    while(1)
-    {
-      if (std::cin.fail())
-      {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-        std::cout << "Wrong input!\nInput format: number of vertices, number of edges, total time" << std::endl;
-        std::cin >> v >> e >> max_time;
-      }
-      else
-      {
-        break;
-      }
-    }
+int main()
+{
 
+    ParseGraphFile pf("in.txt");
+    pf.GetStrLines();
+    IntMatrix GraphMatrix = pf.ConvertStrLinesToInt();
+    
+    
+    v = GraphMatrix[0][0];
+    e = GraphMatrix[0][1];
+    max_time = GraphMatrix[0][2];
+    //std::cin >> v >> e >> max_time;
+    
 
     visited.resize(v, false);
     g.resize(v);
 
-    std::cout << "Input format: first vertex, second vertex, weight" << std::endl;
-
-    for(int i = 0; i < e; ++i) {
+    
+    for(int i = 1; i <= e; ++i) {
         int a, b, t;
 
-        std::cin >> a >> b >> t;
-        while(1)
-        {
-          if (std::cin.fail())
-          {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::cout << "Wrong input!\nInput format: first vertex, second vertex, weight" << std::endl;
-            std::cin >> a >> b >> t;
-          }
-          if (a >= v || b >= v)
-          {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::cout << "Wrong input!\nVertex number should satisfy formula \"0 <= v < " << v << "\"" << std::endl;
-            std::cin >> a >> b >> t;
-          }
-          else
-          {
-            break;
-          }
-        }
+	a = GraphMatrix[i][0];
+	b = GraphMatrix[i][1];
+	t = GraphMatrix[i][2];
+        //std::cin >> a >> b >> t;
+        
         g[a].push_back(Edge(b, t));
         g[b].push_back(Edge(a, t));
     }
