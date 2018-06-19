@@ -1,0 +1,2 @@
+Best solution: length = 4, time = 6
+Path: 0 1 3 2 
