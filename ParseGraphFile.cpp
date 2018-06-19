@@ -1,47 +1,57 @@
 
+#include <iostream>
+#include <limits>
 #include "ParseGraphFile.hpp"
 
 
+ParseGraphFile::ParseGraphFile(std::string FileName) {
+    file.open(FileName);
 
-ParseGraphFile::ParseGraphFile(std::string FileName)
-{
-    FILE.open(FileName);
-}
-
-ParseGraphFile::~ParseGraphFile()
-{
-    FILE.close();
-}
-
-std::vector<std::string>ParseGraphFile::GetStrLines()
-{
-  std::string line;
-
-  while (std::getline(FILE, line))
-  {
-    lines.push_back(line);
-  }
-  return lines;
-}
-
-
-IntMatrix ParseGraphFile::ConvertStrLinesToInt()
-{
-  IntMatrix array;
-
-  for( std::vector<std::string>::iterator it = lines.begin(); it != lines.end(); ++it)
-  {
-    std::vector<int> sub;
-    int temp;
-    std::istringstream iss(*it);
-
-    for(int i = 0; i < 3; i++)
-    {
-      iss >> temp;
-      sub.push_back(temp);
+    if (!file.good()) {
+        std::cout << "Can't open file " << FileName << " or it doesn't exist." << std::endl;
+        std::exit(1);
     }
-    array.push_back(sub);
-  }
+}
 
-  return array;
+ParseGraphFile::~ParseGraphFile() {
+    file.close();
+}
+
+Task ParseGraphFile::ParseTask() {
+    Task task;
+
+    file >> task.graph.vertices >> task.graph.edges >> task.max_time;
+
+    if (file.fail()) {
+        file.clear();
+        file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Wrong input!\nFirst line format: number of vertices, number of edges, total time" << std::endl;
+        std::exit(1);
+    }
+
+    task.graph.resize();
+
+    for (int i = 0; i < task.graph.edges; ++i) {
+        unsigned v, u, time;
+
+        file >> v >> u >> time;
+
+        if (file.fail()) {
+            file.clear();
+            file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Wrong input!\nInput format: first vertex, second vertex, weight" << std::endl;
+            std::exit(1);
+        }
+
+        if (v >= task.graph.vertices || u >= task.graph.vertices) {
+            file.clear();
+            file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Wrong input!\nVertex number should satisfy formula \"0 <= v < " << v << "\"" << std::endl;
+            std::exit(1);
+        }
+
+        task.graph.add_edge(v, u, time);
+    }
+
+    return task;
 }

@@ -3,16 +3,15 @@
 #include <sstream>
 #include <vector>
 
-typedef std::vector< std::vector<int> > IntMatrix;
+#include "structs.h"
 
-class ParseGraphFile
-{
+class ParseGraphFile {
 private:
-	std::ifstream FILE;
-	std::vector<std::string> lines;
+    std::ifstream file;
 public:
     ParseGraphFile(std::string FileName);
+
     ~ParseGraphFile();
-    std::vector<std::string> GetStrLines();
-    IntMatrix ConvertStrLinesToInt();
+
+    Task ParseTask();
 };
