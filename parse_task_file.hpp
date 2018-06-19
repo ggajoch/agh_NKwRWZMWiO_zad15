@@ -13,5 +13,5 @@ public:
 
     ~ParseGraphFile();
 
-    Task ParseTask();
+    Task parse_task();
 };

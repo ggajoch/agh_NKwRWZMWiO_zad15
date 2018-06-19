@@ -1,15 +1,15 @@
-
 #include <iostream>
 #include <limits>
-#include "ParseGraphFile.hpp"
+#include "parse_task_file.hpp"
+#include "argument_parser.hpp"
 
 
-ParseGraphFile::ParseGraphFile(std::string FileName) {
-    file.open(FileName);
+ParseGraphFile::ParseGraphFile(std::string file_name) {
+    file.open(file_name);
 
     if (!file.good()) {
-        std::cout << "Can't open file " << FileName << " or it doesn't exist." << std::endl;
-        std::exit(1);
+        std::cout << "Can't open file " << file_name << " or it doesn't exist." << std::endl;
+        argument_parser::print_help_and_exit(1);
     }
 }
 
@@ -17,7 +17,7 @@ ParseGraphFile::~ParseGraphFile() {
     file.close();
 }
 
-Task ParseGraphFile::ParseTask() {
+Task ParseGraphFile::parse_task() {
     Task task;
 
     file >> task.graph.vertices >> task.graph.edges >> task.max_time;
@@ -26,7 +26,7 @@ Task ParseGraphFile::ParseTask() {
         file.clear();
         file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Wrong input!\nFirst line format: number of vertices, number of edges, total time" << std::endl;
-        std::exit(1);
+        argument_parser::print_help_and_exit(1);
     }
 
     task.graph.resize();
@@ -40,14 +40,14 @@ Task ParseGraphFile::ParseTask() {
             file.clear();
             file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Wrong input!\nInput format: first vertex, second vertex, weight" << std::endl;
-            std::exit(1);
+            argument_parser::print_help_and_exit(1);
         }
 
         if (v >= task.graph.vertices || u >= task.graph.vertices) {
             file.clear();
             file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Wrong input!\nVertex number should satisfy formula \"0 <= v < " << v << "\"" << std::endl;
-            std::exit(1);
+            argument_parser::print_help_and_exit(1);
         }
 
         task.graph.add_edge(v, u, time);
