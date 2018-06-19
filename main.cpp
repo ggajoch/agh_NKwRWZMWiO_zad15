@@ -45,10 +45,14 @@ int main() {
     dfs(0, 0, {0});
 
 
-    printf("Best solution found [len = %u, time = %d]:\n", best_solution.size(), best_solution_time);
+    std::cout << "Best solution found [length = " << best_solution.size() <<
+         ", time = " << best_solution_time << "]" << std::endl;
+    
+    std::cout << "Path: ";
     for (auto i : best_solution) {
-        printf("%d ", i);
+        std::cout << i << " ";
     }
-    printf("\n");
+    std::cout << std::endl;
+
     return 0;
 }
