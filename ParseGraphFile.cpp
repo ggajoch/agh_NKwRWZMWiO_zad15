@@ -31,7 +31,7 @@ Task ParseGraphFile::ParseTask() {
 
     task.graph.resize();
 
-    for (int i = 0; i < task.graph.edges; ++i) {
+    for (unsigned i = 0; i < task.graph.edges; ++i) {
         unsigned v, u, time;
 
         file >> v >> u >> time;

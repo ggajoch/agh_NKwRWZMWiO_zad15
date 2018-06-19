@@ -10,7 +10,7 @@ int best_solution_time;
 std::vector<int> best_solution;
 
 
-int dfs(int vec, int time, std::vector<int> path) {
+void dfs(int vec, int time, std::vector<int> path) {
     bool any_adjanced_edge = false;
 
     for (auto next : task.graph.adjanced[vec]) {
