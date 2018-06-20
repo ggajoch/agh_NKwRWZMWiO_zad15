@@ -5,9 +5,9 @@ namespace argument_parser {
 void print_help() {    
     std::cout << "HELP" << std::endl;    
     std::cout << "The first row of an input file contains " <<    
-    "total number of graph vertices, total number of graph edges, maximal time.\n" <<
-    "Followng rows describe the rest of the graph according to: " <<
-    "start vertex, end vertex, edge wage.\n" <<
+    "the total number of graph vertices (chambers), total number of graph edges (tunnels), maximum time (given until the bombs will blow-up).\n" <<
+    "Following rows describe the rest of the graph according to: " <<
+    "start vertex, end vertex, edge weight.\n" <<
     "Notice that vertices numbering starts from '0'" << std::endl;    
 }
 
