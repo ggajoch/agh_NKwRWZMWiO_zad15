@@ -2,10 +2,15 @@
 
 namespace argument_parser {
 
-void print_help() {
-    // [todo] 
-    std::cout << "HELP" << std::endl;
+void print_help() {    
+    std::cout << "HELP" << std::endl;    
+    std::cout << "The first row of an input file contains " <<    
+    "total number of graph vertices, total number of graph edges, maximal time.\n" <<
+    "Followng rows describe the rest of the graph according to: " <<
+    "start vertex, end vertex, edge wage.\n" <<
+    "Notice that vertices numbering starts from '0'" << std::endl;    
 }
+
 
 void print_help_and_exit(int exit_code) {
     print_help();
