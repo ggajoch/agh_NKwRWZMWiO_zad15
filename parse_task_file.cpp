@@ -7,7 +7,9 @@
 ParseGraphFile::ParseGraphFile(std::string file_name) {
     file.open(file_name);
 
-    if (!file.good()) {
+    if (file.good()) {
+        std::cout << "Successfully opened file " << file_name << std::endl;
+    } else {
         std::cout << "Can't open file " << file_name << " or it doesn't exist." << std::endl;
         argument_parser::print_help_and_exit(1);
     }

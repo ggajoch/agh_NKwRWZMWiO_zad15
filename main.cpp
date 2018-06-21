@@ -53,8 +53,7 @@ int main(int argc, char* argv[]) {
     dfs(0, 0, {0});
 
 
-    std::cout << "Best solution: length = " << best_solution.size() <<
-         ", time = " << best_solution_time << std::endl;
+    std::cout << "Best solution: length = " << best_solution.size() << " vertices, time = " << best_solution_time << std::endl;
     
     std::cout << "Path: ";
     for (auto i : best_solution) {
