@@ -6,7 +6,8 @@ void print_help() {
     std::cout << "Usage: task15 [FILE]" << std::endl;
     std::cout << "Calculate longest path shorter than given time, given input in [FILE]." << std::endl << std::endl;
 
-    std::cout << "With no FILE, default input file name is in.txt" << std::endl << std::endl;
+    std::cout << "With no FILE, default input file name is in.txt" << std::endl <<
+        "If you don't want to use default input file, you should specify relative path to the input file." << std::endl << std::endl;
 
     std::cout << "Description of file contents:" << std::endl;
     std::cout << "The first row of an input file: " <<
