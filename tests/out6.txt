@@ -1,0 +1,2 @@
+Best solution: length = 10 vertices, time = 12
+Path: 0 1 2 3 4 9 11 7 6 5
