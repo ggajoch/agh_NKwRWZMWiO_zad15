@@ -1,10 +1,10 @@
 To build the program, use cmake:
 ```
- - mkdir build
- - cd build
- - cmake ..
- - make
- - ./task15 --help
+mkdir build
+cd build
+cmake ..
+make
+./task15 --help
 ```
 
 Resulting binary will be placed in $(repo)/build/task15
